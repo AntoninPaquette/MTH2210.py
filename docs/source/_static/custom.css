@@ -1,0 +1,4 @@
+div.math > mjx-container {
+    overflow-y: hidden;
+    padding-bottom: 0.1rem; /* Adjust to eliminate space triggering scrollbar */
+}

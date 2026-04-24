@@ -126,7 +126,8 @@ def iter_algo(f, k, x, t, h, list_x, list_t):
 ########################################
 
 def euler(f, x0, t0, tm, m, output=""):
-    """Méthode de résolution numérique d'une équation (dx/dt)(t) = f(x(t),t) par le schéma d'Euler :
+    """
+    Méthode de résolution numérique d'une équation (dx/dt)(t) = f(x(t),t) par le schéma d'Euler :
         - x_0 donné, t_0 donné, pas de temps h donné,
         - x_kp1 = x_k + h*f(x_k,t_k),
         - t_kp1 = t_k + h.
@@ -152,6 +153,7 @@ def euler(f, x0, t0, tm, m, output=""):
         - f(x,t) = np.cos(x) est un float,
         - f(y,t) = np.cos(y) est un np.ndarray,
         - f(x,t) = np.cos(t) est un float.
+
     Ces différences de types peuvent faire échouer la méthode si x est de dimension 1. La méthode est conçue pour fonctionner suivant :
         - si la dimension de x est > 1 :
             - x      défini par un np.array([coordonnées]),
@@ -163,18 +165,22 @@ def euler(f, x0, t0, tm, m, output=""):
             - x      complexe,
             - x      de dimension 1 défini par un np.array([valeur]).
 
-    Les sorties de la méthode sont :
-        - list_x, la liste des points x(t_k),
-        - list_t, la liste des instants t_k.
+    Sorties
+    -------
+    list_x
+        Liste des points x(t_k)
+    list_t
+        Liste des instants t_k.
 
-    Exemples d'appel :
-        - euler(lambda x,t : np.cos(t), 0, 0, 2*np.pi, 100),
-        - euler(lambda x,t : np.array([np.cos(t),np.sin(t)]), np.array([0,0]), 0, 2*np.pi, 100),
-        - def f(x,t):
-              x0,x1 = 1,1
-              return(np.array([x[0]*(x[1]-1),x[1]*(1-x[0])]))
-          x = np.array([2,1])
-          list_x, list_t = euler(f, x, 0, 10, 100).
+    Exemples d'appel
+    ----------------
+    >>> euler(lambda x,t : np.cos(t), 0, 0, 2*np.pi, 100),
+    >>> euler(lambda x,t : np.array([np.cos(t),np.sin(t)]), np.array([0,0]), 0, 2*np.pi, 100),
+    >>> def f(x,t):
+    >>>     x0,x1 = 1,1
+    >>>     return(np.array([x[0]*(x[1]-1),x[1]*(1-x[0])]))
+    >>> x = np.array([2,1])
+    >>> list_x, list_t = euler(f, x, 0, 10, 100).
     """
 
     # Test des paramètres et définition de la destination de sortie des itérations
