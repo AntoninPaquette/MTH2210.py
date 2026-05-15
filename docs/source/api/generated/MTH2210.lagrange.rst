@@ -1,0 +1,6 @@
+﻿MTH2210.lagrange
+================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: lagrange

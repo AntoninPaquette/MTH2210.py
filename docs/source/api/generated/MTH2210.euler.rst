@@ -1,0 +1,6 @@
+﻿MTH2210.euler
+=============
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: euler

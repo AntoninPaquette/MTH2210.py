@@ -1,13 +1,33 @@
 # MTH2210 - Librairie numérique du cours MTH2210 de Polytechnique Montréal
 
-[Résolution d'EDOs](#index-fct)
-
+<!-- ```{eval-rst}
+.. automodule:: MTH2210
+   :members:
+``` -->
 
 
 ```{toctree}
-edo.md
-list_fct.md
+:maxdepth: 1
+:caption: Mise en place
+
+installation/index
 ```
+
+```{toctree}
+:maxdepth: 1
+:caption: Guide
+
+guide/index
+```
+
+
+```{toctree}
+:maxdepth: 1
+:caption: Guide
+
+api/list_fct
+```
+
 
 
 

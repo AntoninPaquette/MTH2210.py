@@ -21,8 +21,11 @@ extensions = [
     'sphinx.ext.autosummary',
     'myst_parser',
     'sphinx.ext.mathjax',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'matplotlib.sphinxext.plot_directive',
 ]
+
+
 
 autosummary_generate = True
 
@@ -46,3 +49,17 @@ language = 'fr'
 html_theme = "pydata_sphinx_theme"
 html_static_path = ['_static']
 html_css_files = ['custom.css']
+
+# Remove the icons surrounding the plots
+plot_html_show_formats = False
+plot_html_show_source_link = False
+
+
+# html_sidebars = {
+#     '**': [
+#         "sidebar-collapse", 
+#         "sidebar-nav-bs",
+#         'globaltoc.html',
+#     ]
+# }
+

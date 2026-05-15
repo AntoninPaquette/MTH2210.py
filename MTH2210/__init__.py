@@ -10,3 +10,7 @@ from MTH2210.Interpolations.spline_cub import spline_cub
 
 from MTH2210.EDO.euler import euler
 from MTH2210.EDO.rk4   import rk4
+
+__all__ = ["bissection","newton_1d","newton_nd","newton_nd_avec_der","point_fixe","secante",
+           "lagrange","spline_cub",
+           "euler", "rk4"]

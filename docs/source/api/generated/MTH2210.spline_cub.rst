@@ -1,0 +1,6 @@
+﻿MTH2210.spline\_cub
+===================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: spline_cub

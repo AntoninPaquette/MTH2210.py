@@ -1,0 +1,6 @@
+﻿MTH2210.secante
+===============
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: secante

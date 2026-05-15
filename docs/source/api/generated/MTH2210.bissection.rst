@@ -1,0 +1,6 @@
+﻿MTH2210.bissection
+==================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: bissection

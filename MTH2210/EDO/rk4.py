@@ -129,61 +129,104 @@ def iter_algo(f, k, x, t, h, list_x, list_t):
 # Définition de la fonction principale #
 ########################################
 
+
 def rk4(f, x0, t0, tm, m, output=""):
-    """Méthode de résolution numérique d'une équation (dx/dt)(t) = f(x(t),t) par le schéma de Runge-Kutta d'ordre 4 :
-        - x_0 donné, t_0 donné, pas de temps h donné,
-        - y_k^1 = f(x_k          , t_k    ),
-        - y_k^2 = f(x_k+y_k^1*h/2, t_k+h/2),
-        - y_k^2 = f(x_k+y_k^2*h/2, t_k+h/2),
-        - y_k^4 = f(x_k+y_k^3*h  , t_k+h  ),
-        - x_kp1 = x_k + (y_k^1+2y_k^2+3y_k^3+y_k^4)*h/6,
-        - t_kp1 = t_k + h.
-
-    Les arguments attendus sont :
-        - une fonction f, admettant en entrée un vecteur x et un réel t, renvoyant un vecteur f(x,t),
-        - un vecteur x0, condition initiale de l'équation,
-        - deux réels t0 et tm, les bornes de l'intervalle de temps sur lequel l'équation est appliquée,
-        - un entier m, le pas de discrétisation de [t0,tm], définissant donc h = (tm-t0)/m.
-
-    L'argument optionnel est une chaîne de caractères output (défaut = "") qui renvoie les affichages de la fonction vers :
-        - la sortie standard si output = "pipe",
-        - un fichier ayant pour nom+extension output (le paramètre doit donc contenir l'extension voulue, et le chemin d'accès doit exister),
-        - nulle part (aucune information écrite ni sauvegardée) si output = "" ou output = "None".
-
-    La méthode vérifie les conditions suivantes :
-        - la fonction f est définie en (x0,t0) et en (x0,tm),
-        - f(x0,t0) renvoie un vecteur de la même dimension et même type que x0,
-        - tous les paramètres reçus ont bien le type attendu.
-
-    À noter que si x est un vecteur de dim 1, f doit être implémentée avec parcimonie pour ne pas renvoyer un mauvais type. Par exemple :
-        - x = np.array(0) est un np.ndarray, y = np.array([0]) également,
-        - f(x,t) = np.cos(x) est un float,
-        - f(y,t) = np.cos(y) est un np.ndarray,
-        - f(x,t) = np.cos(t) est un float.
-    Ces différences de types peuvent faire échouer la méthode si x est de dimension 1. La méthode est conçue pour fonctionner suivant :
-        - si la dimension de x est > 1 :
-            - x      défini par un np.array([coordonnées]),
-            - f(x,t) renvoyant  un np.ndarray de même dimension que x,
-        - si x est de dimension 1 :
-            - x      défini par un float ou un int,
-            - f(x,t) renvoyant  un float,
-        - cas sans garantie de fonctionnement correct :
-            - x      complexe,
-            - x      de dimension 1 défini par un np.array([valeur]).
-
-    Les sorties de la méthode sont :
-        - list_x, la liste des points x(t_k),
-        - list_t, la liste des instants t_k.
-
-    Exemples d'appel :
-        - rk4(lambda x,t : np.cos(t), 0, 0, 2*np.pi, 100),
-        - rk4(lambda x,t : np.array([np.cos(t),np.sin(t)]), np.array([0,0]), 0, 2*np.pi, 100),
-        - def f(x,t):
-              x0,x1 = 1,1
-              return(np.array([x[0]*(x[1]-x1),x[1]*(x0-x[0])]))
-          x = np.array([2,1])
-          list_x, list_t = rk4(f, x, 0, 10, 100).
     """
+    Résout numériquement une équation différentielle ordinaire par la méthode de Runge-Kutta d'ordre 4.
+
+    Cette fonction approxime la solution du problème de Cauchy :
+        dx/dt = f(x, t),   x(t0) = x0
+
+    en utilisant le schéma explicite de Runge-Kutta d'ordre 4 (RK4) :
+        y1 = f(x_k, t_k)
+        y2 = f(x_k + h*y1/2, t_k + h/2)
+        y3 = f(x_k + h*y2/2, t_k + h/2)
+        y4 = f(x_k + h*y3,   t_k + h)
+
+        x_{k+1} = x_k + (h/6) * (y1 + 2*y2 + 2*y3 + y4)
+        t_{k+1} = t_k + h
+
+    où h = (tm - t0) / m.
+
+    Parameters
+    ----------
+    f : callable
+        Fonction définissant l'équation différentielle. Elle doit prendre en entrée
+        un état `x` et un temps `t`, et retourner une valeur de même type et dimension que `x`.
+    x0 : float ou numpy.ndarray
+        Condition initiale à l'instant `t0`. Peut être un scalaire (problème de dimension 1)
+        ou un tableau NumPy pour les systèmes de dimension supérieure.
+    t0 : float
+        Temps initial.
+    tm : float
+        Temps final.
+    m : int
+        Nombre de pas de discrétisation de l'intervalle [t0, tm].
+        Le pas de temps est donné par `h = (tm - t0) / m`.
+    output : str, optionnel
+        Définit la destination des sorties intermédiaires :
+        - `"pipe"` : affichage dans la sortie standard,
+        - nom de fichier : écriture dans un fichier,
+        - `""` ou `"None"` : aucune sortie (valeur par défaut).
+
+    Returns
+    -------
+    list_x : list
+        Liste des approximations de la solution x(t_k).
+    list_t : list
+        Liste des instants t_k.
+
+    Raises
+    ------
+    TypeError
+        Si les paramètres n'ont pas les types attendus.
+    ValueError
+        Si `f(x0, t0)` ou `f(x0, tm)` est mal défini ou incompatible avec `x0`.
+
+    Notes
+    -----
+    - La fonction vérifie que :
+      - `f` est définie en `(x0, t0)` et `(x0, tm)`,
+      - `f(x0, t0)` renvoie un objet de même type et dimension que `x0`.
+
+    - Cas particuliers pour les problèmes de dimension 1 :
+      - Si `x0` est un scalaire, alors `f(x, t)` doit renvoyer un scalaire.
+      - Si `x0` est un tableau NumPy de taille 1, des incohérences de type peuvent apparaître.
+
+    - Utilisation recommandée :
+      - Si dim(x) > 1 :
+        - `x0` sous forme de `numpy.ndarray`,
+        - `f(x, t)` retourne un tableau de même dimension.
+      - Si dim(x) = 1 :
+        - `x0` scalaire (`float` ou `int`),
+        - `f(x, t)` retourne un scalaire.
+
+    - Cas non garantis :
+      - Variables complexes,
+      - Variable de dimension 1 définie comme un tableau NumPy de taille 1.
+
+    See Also
+    --------
+    euler : Méthode d'Euler explicite.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import matplotlib.pyplot as plt
+    >>> list_x, list_t = rk4(lambda x, t: np.cos(t), 0.0, 0.0, 2*np.pi, 100)
+
+    >>> f = lambda x, t: np.array([np.cos(t), np.sin(t)])
+    >>> x0 = np.array([0.0, 0.0])
+    >>> list_x, list_t = rk4(f, x0, 0.0, 2*np.pi, 100)
+
+    >>> def f(x, t):
+    ...     return np.array([x[0]*(x[1] - 1), x[1]*(1 - x[0])])
+    >>> x0 = np.array([2.0, 1.0])
+    >>> list_x, list_t = rk4(f, x0, 0.0, 10.0, 100)
+    >>> plt.plot(list_t, list_t)
+    >>> plt.show()
+    """
+
 
     # Test des paramètres et définition de la destination de sortie des itérations
     if check_type_arguments.check_real(x0)[0]: x0 = float(x0)

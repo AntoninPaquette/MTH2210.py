@@ -1,0 +1,6 @@
+﻿MTH2210.point\_fixe
+===================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: point_fixe

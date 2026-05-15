@@ -1,0 +1,6 @@
+﻿MTH2210.newton\_nd\_avec\_der
+=============================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: newton_nd_avec_der
