@@ -18,7 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest==9.0.3"]
-docs = ["sphinx==9.1","myst-parser==5.0.0"]
+docs = ["sphinx==9.1","myst-parser==5.0.0","pydata-sphinx-theme==0.17.0"]
 dev = ["MTH2210[test,docs]"]
 
 [tool.pytest.ini_options]
