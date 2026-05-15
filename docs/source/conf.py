@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'MTH2210'
-copyright = '2026, Pierre-Yves Bouchet'
-author = 'Pierre-Yves Bouchet'
+author = 'Pierre-Yves Bouchet, Antonin Paquette-Rufiange'
+copyright = '2026, ' + author
 release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------
@@ -35,8 +35,6 @@ myst_enable_extensions = [
     "amsmath",
 ]
 
-
-master_doc = 'accueil'
 
 templates_path = ['_templates']
 exclude_patterns = []

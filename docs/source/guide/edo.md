@@ -48,7 +48,7 @@ Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}
     import numpy as np
     import matplotlib.pyplot as plt
 
-    from MTH2210.EDO.euler import euler
+    from MTH2210 import euler
 
     def my_edo(z,t):
         m = 2.0
@@ -59,7 +59,7 @@ Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}
         return f
 ```
 
-Il faut ensuite appeler la fonction {py:func}`MTH2210.EDO.euler.euler`:
+Il faut ensuite appeler la fonction {py:func}`MTH2210.euler`:
 
 ```{eval-rst}
 .. plot::
