@@ -1,10 +1,5 @@
 # MTH2210 - Librairie numérique du cours MTH2210 de Polytechnique Montréal
 
-<!-- ```{eval-rst}
-.. automodule:: MTH2210
-   :members:
-``` -->
-
 
 ```{toctree}
 :maxdepth: 1
@@ -23,7 +18,7 @@ guide/index
 
 ```{toctree}
 :maxdepth: 1
-:caption: Guide
+:caption: Références
 
 api/list_fct
 ```

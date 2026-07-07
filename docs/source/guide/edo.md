@@ -41,6 +41,23 @@ On peut appliquer la méthode d'Euler explicite afin de résoudre ce système d'
 Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}^2$:
 
 ```{eval-rst}
+.. jupyter-execute::
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    from MTH2210 import euler
+
+    def my_edo(t,z):
+        m = 2.0
+        k = 3.0
+        f = np.zeros_like(z)
+        f[0] = z[1]
+        f[1] = -k/m*z[0]
+        return f
+```
+<!-- 
+```{eval-rst}
 .. plot::
     :context: reset
     :include-source:
@@ -50,77 +67,36 @@ Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}
 
     from MTH2210 import euler
 
-    def my_edo(z,t):
+    def my_edo(t,z):
         m = 2.0
         k = 3.0
-        f = np.array([0,0])
+        f = np.zeros_likes(z)
         f[0] = z[1]
         f[1] = -k/m*z[0]
         return f
-```
+``` -->
 
 Il faut ensuite appeler la fonction {py:func}`MTH2210.euler`:
 
 ```{eval-rst}
-.. plot::
-    :context:
-    :include-source:
+.. jupyter-execute::
 
     t0 = 1.0
     tf = 4.0
-    z0 = np.array([5.0,0.0])
+    z0 = np.array([5.0, 0.0])
     nbpas = 1000
-    (z, temps) = euler(my_edo, z0 , t0, tf , nbpas)
+    (temps, z) = euler(my_edo, [t0, tf], z0, nbpas)
 ```
 
 On peut ensuite afficher le graphique des résultats
 
 ```{eval-rst}
-.. plot::
-    :context:
-    :include-source:
+.. jupyter-execute::
 
     fig, ax = plt.subplots(1)
-    ax.plot(temps, z, label=["z_1","z_2"])
+    ax.plot(temps, z[:,0], label=["z_1"])
+    ax.plot(temps, z[:,1], label=["z_2"])
     ax.set_xlabel("Time t")
     ax.set_title("Approximation avec Euler exp.")
     fig.legend()
 ```
-
-<!--
-```@example 1
-function my_edo(t,z)
-    m = 2.
-    k = 3.
-    f = zeros(length(z))
-    f[1] = z[2]
-    f[2] = -k/m*z[1]
-    return f
-end
-nothing # hide
-```
-
-Il faut ensuite appeler la fonction [`euler`](@ref):
-
-```@example 1
-using MTH2210
-using Plots
-
-t0 = 1.
-tf = 4.
-tspan = [t0,tf]
-z0 = [5.,0.]
-nbpas = 1000
-(temps, z) = euler(my_edo, tspan , z0 , nbpas)
-nothing # hide
-```
-
-Les résultats peuvent ensuite être affichés dans un graphique.
-
-```@example 1
-plot(temps,z[1,:],label="y(t)")
-plot!(temps,z[2,:],label="y'(t)",xlabel="temps [s]", title="Approximation avec Euler exp.")
-plot!([],[],label="",size=(400,300)); savefig("edo-plot.png"); nothing # hide
-```
-
-![Solutions numériques du systèmes d'EDOs](edo-plot.png) -->

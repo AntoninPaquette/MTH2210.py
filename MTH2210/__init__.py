@@ -8,8 +8,8 @@ from MTH2210.Racines_points_fixes.secante             import secante
 from MTH2210.Interpolations.lagrange   import lagrange
 from MTH2210.Interpolations.spline_cub import spline_cub
 
-from MTH2210.EDO.euler import euler
-from MTH2210.EDO.rk4   import rk4
+from MTH2210.edo import euler
+from MTH2210.edo import rk4
 
 __all__ = ["bissection","newton_1d","newton_nd","newton_nd_avec_der","point_fixe","secante",
            "lagrange","spline_cub",

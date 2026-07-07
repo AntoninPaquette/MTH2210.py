@@ -23,6 +23,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'matplotlib.sphinxext.plot_directive',
+    'jupyter_sphinx'
 ]
 
 
