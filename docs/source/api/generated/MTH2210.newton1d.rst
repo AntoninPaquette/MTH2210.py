@@ -1,0 +1,6 @@
+﻿MTH2210.newton1d
+================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: newton1d

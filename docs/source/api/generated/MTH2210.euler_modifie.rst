@@ -1,0 +1,6 @@
+﻿MTH2210.euler\_modifie
+======================
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: euler_modifie

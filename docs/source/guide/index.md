@@ -18,6 +18,6 @@ La documentation de la librairie numérique MTH2210 est disponible aux pages sui
 ```{toctree}
 :maxdepth: 1
 
-edo
 non_linear
+edo
 ```

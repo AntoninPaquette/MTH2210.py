@@ -13,9 +13,8 @@ Le problème de recherche de racine $r \in \mathbb{R}^n$ d'une fonction $F:\math
 Les algorithmes disponibles pour trouver les racines d'une fonction $F$ sont:
 1. Bissection pour $n=1$ : {py:func}`MTH2210.bissection`,
 2. Sécante pour $n=1$ : {py:func}`MTH2210.secante`,
-3. Newton avec dérivée pour $n=1$ : {py:func}`MTH2210.newton_1d`,
-4. Newton avec dérivée pour $n\geq 1$ : {py:func}`MTH2210.newton_nd_avec_der`,
-5. Newton sans dérivée pour $n\geq 1$ : {py:func}`MTH2210.newton_nd`.
+3. Newton pour $n=1$ : {py:func}`MTH2210.newton1d`,
+4. Newton pour $n\geq 1$ : {py:func}`MTH2210.newtonNd`,
 
 Le deuxième type de problème à résoudre est le problème de recherche d'un point
 fixe $z \in \mathbb{R}$ d'une fonction $g:\mathbb{R} \to \mathbb{R}$ tel que
@@ -24,7 +23,7 @@ fixe $z \in \mathbb{R}$ d'une fonction $g:\mathbb{R} \to \mathbb{R}$ tel que
 \end{align*}
  
 L'algorithme disponible pour trouver les points-fixes d'une fonction $g$ est:
-1. Point-fixe pour $n=1$ : {py:func}`MTH2210.point_fixe`
+1. Point-fixe pour $n=1$ : {py:func}`MTH2210.ptfixe`
 
 
 ## Exemple de résolution d'une équation non-linéaire
@@ -38,7 +37,7 @@ positive de $f(x) = x^2 - 10$. On définit tout d'abord la fonction $f$:
     import numpy as np
     import matplotlib.pyplot as plt
 
-    from MTH2210 import bissection, secante, newton_1d, point_fixe
+    from MTH2210 import bissection, secante, newton1d, ptfixe
 
     def my_fct_nl(x):
         f = x**2 - 10
@@ -49,10 +48,8 @@ positive de $f(x) = x^2 - 10$. On définit tout d'abord la fonction $f$:
         return df
 ```
 
- 
-
 On appelle ensuite les fonctions {py:func}`MTH2210.bissection`, {py:func}`MTH2210.secante` et
-{py:func}`MTH2210.newton_1d` afin de résoudre ce problème. On choisit ``x_0=2.5`` et
+{py:func}`MTH2210.newton1d` afin de résoudre ce problème. On choisit ``x_0=2.5`` et
 ``x_1=4`` de sorte que $f(x_0)f(x_1)<0$ et une tolérance sur l'erreur relative
 de ``tol=10e-9``.
 
@@ -63,9 +60,9 @@ de ``tol=10e-9``.
     x1 = 4.
     tol = 1e-9
 
-    (approx_bis , f_bis) = bissection(my_fct_nl , x0 , x1 , 100 , tol)
-    (approx_sec , f_sec, df_sec) = secante(my_fct_nl , x0 , x1 , 50 , tol)
-    (approx_new , f_new, df_new) = newton_1d(my_fct_nl , my_dfct_nl , x0 , 20 , tol)
+    (approx_bis , err_bis) = bissection(my_fct_nl , x0 , x1 , 100 , tol)
+    (approx_sec , err_sec) = secante(my_fct_nl , x0 , x1 , 50 , tol)
+    (approx_new , err_new) = newton1d(my_fct_nl , my_dfct_nl , x0 , 20 , tol)
 ```
 
 La méthode des points-fixes peut aussi être employée pour approximer
@@ -79,7 +76,7 @@ un point-fixe attractif est $\sqrt{10}$
         g = -x**2/10 + x + 1
         return g
 
-    (approx_fixe , err_fixe) = point_fixe(fct_g , x0 , 50 , 1e-9)
+    (approx_fixe , err_fixe) = ptfixe(fct_g , x0 , 50 , 1e-9)
 ``` -->
 
 
@@ -88,14 +85,10 @@ On peut ensuite afficher l'évolution des erreurs selon l'itération.
 ```{eval-rst}
 .. jupyter-execute::
 
-    err_bis = np.abs(approx_bis - np.sqrt(10))
-    err_sec = np.abs(approx_sec - np.sqrt(10))
-    err_newton = np.abs(approx_new - np.sqrt(10))
-
     fig, ax = plt.subplots(1)
     ax.plot(err_bis,label="Bissection")
     ax.plot(err_sec,label="Sécante")
-    ax.plot(err_newton,label="Newton")
+    ax.plot(err_new,label="Newton")
 
     ax.set_yscale('log')
     ax.set_xlabel("Nb itérations")

@@ -5,9 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "MTH2210"
 version = "0.0.1"
-authors = [{name = "Pierre-Yves Bouchet"},
-           {name = "Alexis Montoison"},
-           {name = "Antonin Paquette-Rufiange"}]
+authors = [{name = "Antonin Paquette-Rufiange"},
+            {name = "Pierre-Yves Bouchet"}]
 maintainers = [
   {name = "Antonin Paquette-Rufiange", email = "antonin.paquette-rufiange@polymtl.ca"}
 ]

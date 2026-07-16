@@ -73,7 +73,11 @@ def bissection(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
 
     See Also
     --------
-
+    secante : Méthode de la sécante
+    ptfixe : Méthode des points-fixes
+    newton1d : Méthode de Newton en 1D
+    newtonNd : Méthode de Newton en N dimension
+    
     Examples
     --------
     >>> import numpy as np
@@ -178,7 +182,11 @@ def secante(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
 
     See Also
     --------
-
+    bissection : Méthode de la bissection
+    ptfixe : Méthode des points-fixes
+    newton1d : Méthode de Newton en 1D
+    newtonNd : Méthode de Newton en N dimension
+    
     Examples
     --------
     >>> import numpy as np
@@ -252,7 +260,11 @@ def newton1d(fct:Callable, dfct:Callable, x0:float, nb_it_max:int, tol_rel:float
 
     See Also
     --------
-
+    bissection : Méthode de la bissection
+    secante : Méthode de la sécante
+    ptfixe : Méthode des points-fixes
+    newtonNd : Méthode de Newton en N dimension
+    
     Examples
     --------
     >>> import numpy as np
@@ -320,6 +332,13 @@ def ptfixe(fct:Callable, x0:float, nb_it_max:int, tol_rel:float):
     """ 
     Methode des points-fixes pour la resolution de f(x) = x
 
+    See Also
+    --------
+    bissection : Méthode de la bissection
+    secante : Méthode de la sécante
+    newton1d : Méthode de Newton en 1D
+    newtonNd : Méthode de Newton en N dimension
+
     """
 
     _init_non_linear(fct, x0, nb_it_max, tol_rel)
@@ -352,6 +371,13 @@ def ptfixe(fct:Callable, x0:float, nb_it_max:int, tol_rel:float):
 def newtonNd(fct:Callable, x0:npt.ArrayLike, nb_it_max:int, tol_rel:float, h:float=None, dfct:Callable=None):
     """ 
     Methode de Newton pour la resolution de F(x) = 0, pour F: R^n -> R^n
+
+    See Also
+    --------
+    bissection : Méthode de la bissection
+    secante : Méthode de la sécante
+    ptfixe : Méthode des points-fixes
+    newton1d : Méthode de Newton en 1D
     """
 
     try:

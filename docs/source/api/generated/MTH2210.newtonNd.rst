@@ -1,6 +1,6 @@
-﻿MTH2210.lagrange
+﻿MTH2210.newtonNd
 ================
 
 .. currentmodule:: MTH2210
 
-.. autofunction:: lagrange
+.. autofunction:: newtonNd
