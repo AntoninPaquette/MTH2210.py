@@ -276,9 +276,9 @@ def newton1d(fct:Callable, dfct:Callable, x0:float, nb_it_max:int, tol_rel:float
 
     x0 = np.float64(x0)
 
-    app	= np.nan * np.ones(nb_it_max)
+    app	= np.nan * np.ones(nb_it_max+1)
     app[0] = x0
-    err_rel	= np.inf * np.ones(nb_it_max)
+    err_rel	= np.inf * np.ones(nb_it_max+1)
     arret = False
 
     for t in range(nb_it_max):
@@ -289,7 +289,7 @@ def newton1d(fct:Callable, dfct:Callable, x0:float, nb_it_max:int, tol_rel:float
             print(f"La derivee de f au point x={app[t]:.5e} est exactement 0.\nArret de l'algorithme")
             break
 
-        err_rel[t] = np.abs(app[t+1]-app[t])/(np.abs(app[t+1]) + machine_precision);
+        err_rel[t] = np.abs(app[t+1]-app[t])/(np.abs(app[t+1]) + machine_precision)
         if (err_rel[t] <= tol_rel) or (fct(app[t+1]) == 0):
             arret = True
             break
@@ -304,28 +304,6 @@ def newton1d(fct:Callable, dfct:Callable, x0:float, nb_it_max:int, tol_rel:float
         print("La methode de Newton n'a pas convergée")
 
     return approx, err_abs 
-
-
-# function [test] = check_derivative(f,df,x0)
-
-# 	if x0 == 0
-# 		h_init	=	1e-6;
-# 	else
-# 		h_init	=	1e-3 * abs(x0);
-# 	end
-
-# 	h		=	h_init./(2.^(0:4));
-# 	erreur	=	nan(size(h));
-
-# 	for t=1:length(h)
-# 		app			=	(f(x0+h(t)) - f(x0-h(t)))/(2*h(t));
-# 		erreur(t)	=	abs(df(x0) - app);
-# 	end
-
-# 	ordre	=	log(erreur(2:end) ./ erreur(1:end-1)) ./ ...
-# 				log(h(2:end)      ./ h(1:end-1));
-
-# 	test	=	(mean( abs(2 - ordre) ) <= 0.25) || (mean(erreur/(abs(df(x0))+eps)) <=1e-9);
 
 
 def ptfixe(fct:Callable, x0:float, nb_it_max:int, tol_rel:float):

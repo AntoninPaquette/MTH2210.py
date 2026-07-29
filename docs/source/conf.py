@@ -19,11 +19,12 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    'myst_parser',
+    # 'myst_parser',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'matplotlib.sphinxext.plot_directive',
-    'jupyter_sphinx'
+    'jupyter_sphinx',
+    'myst_nb'
 ]
 
 
@@ -32,8 +33,8 @@ autosummary_generate = True
 
 # Enable dollar sign ($ and $$) math syntax in MyST
 myst_enable_extensions = [
-    "dollarmath",
     "amsmath",
+    "dollarmath",
 ]
 
 
@@ -52,6 +53,7 @@ html_css_files = ['custom.css']
 # Remove the icons surrounding the plots
 plot_html_show_formats = False
 plot_html_show_source_link = False
+
 
 
 # html_sidebars = {

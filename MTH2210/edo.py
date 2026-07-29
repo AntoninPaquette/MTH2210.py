@@ -17,7 +17,7 @@ def edo_init(
     if tspan.shape[0] != 2:
         raise ValueError("Le vecteur tspan doit contenir 2 composantes, [t0 , tf]")
 
-    if nbpas <= 0 or not isinstance(nbpas, int):
+    if not isinstance(nbpas, (int, np.integer)) or nbpas <= 0:
         raise ValueError("L'argument nbpas doit être un entier > 0.")
 
     try:
@@ -89,8 +89,10 @@ def euler(
 
     See Also
     --------
+    euler_modifie : Méthode d'Euler modifié
+    pt_milieu : Méthode du point milieu
     rk4 : Méthode de Runge-Kutta d'ordre 4.
-
+    
     Examples
     --------
 
@@ -283,7 +285,7 @@ def euler_modifie(
         yt      = Y[t]
         y_tilde = yt + h * fct(temps[t], Y[t])
 
-        Y[t+1]  = Y[t] + h/2 * (fct(temps[t], Y[t]) + fct(temps[t] + h, Y[t] + y_tilde))
+        Y[t+1]  = Y[t] + h/2 * (fct(temps[t], Y[t]) + fct(temps[t] + h, y_tilde))
 
     return temps, Y
 

@@ -3,14 +3,14 @@
 
 ## Fonctions pour l'interpolation
 
-<!-- ```{eval-rst}
+```{eval-rst}
 .. autosummary::
     :nosignatures:
     :toctree: generated
 
     MTH2210.lagrange
-    MTH2210.spline_cub
-``` -->
+    MTH2210.splinec
+```
 
 ## Fonctions pour résoudre des équations non-linéaires
 

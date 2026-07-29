@@ -7,20 +7,17 @@ def _init_interpolation(xi, yi, x):
 
     for arg, arg_name in zip([xi, yi, x],["xi", "yi", "x"]):
 
-        print(xi.__class__)
-
         try:
-            arg = np.asarray(arg, dtype=np.float64)
-            print(arg.__class__)
+            arg = np.atleast_1d(arg)
         except:
             raise Exception(f"Le paramètre {arg_name} ne peut être converti en np.ndarray de type np.float64")
         
         if arg.ndim != 1:
             raise Exception(f"Le paramètre {arg_name} n'est pas unidimensionnelle")
     
-    xi = np.asarray(xi, dtype=np.float64)
-    yi = np.asarray(yi, dtype=np.float64)
-    x = np.asarray(x, dtype=np.float64)
+    xi = np.atleast_1d(xi)
+    yi = np.atleast_1d(yi)
+    x = np.atleast_1d(x)
 
     if xi.shape[0] != yi.shape[0]:
         raise Exception("Les paramètres xi et yi doivent être de même taille")
@@ -30,7 +27,7 @@ def _init_interpolation(xi, yi, x):
 
     return xi, yi, x
 
-def lagrange(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike) -> npt.NDArray[np.float64]:
+def lagrange(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike):
     """
     Polynôme de Lagrange passant par les points xi et yi
 
@@ -51,7 +48,7 @@ def lagrange(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike) -> npt.NDArray
 
     Returns
     -------
-    Lx : NDArray de dimension 1
+    NDArray de dimension 1
         Valeur du polynôme de Lagrange aux points x
 
     See Also
@@ -105,10 +102,9 @@ def _poly_spline(xi,yi,Spp,h,x):
     
     return Px
 
-def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.ArrayLike, val_S:npt.ArrayLike) -> npt.NDArray[np.float64]:
+def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.ArrayLike, val_S:npt.ArrayLike):
     """
-    Spline cubique passant par les points xi et yi avec differents 
-    type de conditions frontieres
+    Spline cubique passant par les points xi et yi avec differents type de conditions frontieres
 
     Parameters
     ----------
@@ -118,11 +114,24 @@ def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.Arra
         Ordonnées des points d'interpolation
     x : Arraylike de dimension 1
         Points où le polynôme de Lagrange sera évalué
+    type_S : Arraylike de dimension 1 avec 2 éléments
+        Vecteur de 2 éléments contenant le type des conditions frontieres imposees en x0 et xn. Les choix possibles sont:
+		- [1,1] -> Spline naturelle 
+		- [2,2] -> Spline avec courbure prescrite
+		- [3,3] -> Spline avec courbure constante
+		- [4,4] -> Spline avec pente prescrite
+		- [i,j] -> Spline avec condition i imposee en x0 et condition j imposee en xn
+    val_S : Arraylike de dimension 1 avec 2 éléments
+        Vecteur de 2 éléments contenant les deux conditions limites imposées en x0 et xn. Les choix possibles sont:
+		- Si type_S(1) = 1 ou 3, alors val_S(1) = nan
+		- Si type_S(1) = 2 ou 4, alors val_S(1) = a, où a représente resp. la courbure ou la pente en x0
+		- Si type_S(2) = 1 ou 3, alors val_S(1) = nan
+		- Si type_S(2) = 2 ou 4, alors val_S(1) = b, où b représente resp. la courbure ou la pente en xn
 
     Returns
     -------
-    Xx : NDArray de dimension 1
-        Valeur du polynôme de Lagrange aux points x
+    NDArray de dimension 1
+        Valeur de la spline aux points x
 
     See Also
     --------
@@ -130,51 +139,35 @@ def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.Arra
 
     Examples
     --------
-
-
-# % Argument d'entree
-# %	xi		-	Vecteur contenant les abscisses des points d'interpolation
-# %	yi		-	Vecteur contenant les ordonnees des points d'interpolation
-# %	x		-	Vecteur contenant les points o� la spline sera evalue
-# %	type_S	-	Vecteur de dimension 2 contenant le type des conditions 
-# %				frontieres imposees en x0 et xn. Les choix possibles sont:
-# %					[1,1] -> Spline naturelle 
-# %					[2,2] -> Spline avec courbure prescrite
-# %					[3,3] -> Spline avec courbure constante
-# %					[4,4] -> Spline avec pente prescrite
-# %					[i,j] -> Spline avec condition i imposee en x0 et 
-# %							 condition j imposee en xn
-# %							 	
-# %	val_S	-	Vecteur de dimension 2 contenant les deux conditions 
-# %				limites imposees en x0 et xn. Les choix possibles sont:
-# %					- Si type_S(1) = 1 ou 3, alors val_S(1) = nan
-# %					- Si type_S(1) = 2 ou 4, alors val_S(1) = a, o� a 
-# %					  represente resp. la courbure ou la pente en x0
-# %					- Si type_S(2) = 1 ou 3, alors val_S(1) = nan
-# %					- Si type_S(2) = 2 ou 4, alors val_S(1) = b, o� b 
-# %					  represente resp. la courbure ou la pente en xn
-# %
-# % Arguments de sortie
-# %	Sx		-	Vecteur contenant les valeurs de la spline aux points x
-# %
-# % Exemples d'appel
-# %	[ Sx ] = splinec([1,2,4,5], [1,9,2,11], linspace(1,5), [1,1] , [nan,nan])
-# %	[ Sx ] = splinec([1,2,4,5], [1,9,2,11], linspace(1,5), [2,2] , [5,-6])
-# %	[ Sx ] = splinec([1,2,4,5], [1,9,2,11], linspace(1,5), [3,3] , [nan,nan])
-# %	[ Sx ] = splinec([1,2,4,5], [1,9,2,11], linspace(1,5), [4,4] , [-30,-10])
-# %	[ Sx ] = splinec([1,2,4,5], [1,9,2,11], linspace(1,5), [3,4] , [nan,-10])
-
+    >>> import numpy as np
+    >>> from MTH2210 import splinec 
+    >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [1,1] , [np.nan,np.nan])
+    >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [2,2] , [5,-6])
+    >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [3,3] , [np.nan,np.nan])
+    >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [4,4] , [-30,-10])
+    >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [3,4] , [np.nan,-10])
     """
 
     (xi , yi , x) = _init_interpolation(xi, yi, x)
+
+    try:
+        type_S = np.asarray(type_S, dtype=int)
+    except:
+        raise Exception(f"Le paramètre 'type_S' ne peut être converti en np.ndarray de type int")
     
-# elseif ~isnumeric(type_S) || ~isvector(type_S) || length(type_S)~=2 || ~any(type_S(1)==[1,2,3,4]) || ~any(type_S(2)==[1,2,3,4])
-# 	error('Les types de conditions frontieres ne sont pas valide')
-# elseif ~isnumeric(val_S) || ~isvector(val_S) || length(val_S)~=2
-# 	error('Les valeurs des conditions frontieres ne sont pas dans un vecteur de dimension 2')
-# end
+    if type_S.ndim != 1 or type_S.shape[0] !=2:
+        raise Exception(f"Le paramètre 'type_S' n'est pas un vecteur de dimension 1 contenant 2 éléments")
+    elif not np.all(np.isin(type_S, [1,2,3,4])):
+        raise Exception("Le paramètre 'type_S' doit contenir les valeurs 1, 2, 3 ou 4")
 
-
+    try:
+        val_S = np.asarray(val_S, dtype=np.float64)
+    except:
+        raise Exception(f"Le paramètre 'val_S' ne peut être converti en np.ndarray de type float")
+    
+    if val_S.ndim != 1 or val_S.shape[0] !=2:
+        raise Exception(f"Le paramètre 'val_S' n'est pas un vecteur de dimension 1 contenant 2 éléments")
+    
     #  Calcul des coefficients S''
 
     # Assemblage de la matrice
@@ -230,7 +223,7 @@ def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.Arra
             B[-1]			= 6/h[-1] * (val_S[1] - (yi[-1] - yi[-2])/h[-1])
 
     # Resolution du systeme lineaire avec reformattage de la matrice sparse
-    Spp	= spsolve(matrice.todia(), B)
+    Spp	= spsolve(matrice.tocsr(), B)
 
 
     # Calcul de la spline aux points x 

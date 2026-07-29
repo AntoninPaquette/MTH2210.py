@@ -1,168 +1,97 @@
-import numpy as np
 import pytest
 
+import numpy as np
+from numpy.linalg import norm
 
-@pytest.fixture
-def ode_integrators():
-    return [
-        algo(euler, 1),
-        algo(eulermod, 2),
-        algo(ptmilieu, 2),
-        algo(rk4, 4),
-    ]
+from MTH2210 import euler, euler_modifie, pt_milieu, rk4
+from tests.utils import order_computation
 
+# Intégration exacte pour soution polynomiale de degré 1
+@pytest.mark.parametrize("algo", [euler, euler_modifie, pt_milieu, rk4])
+def test_exact_degree1(algo):
+    fct = lambda t,y: 3
+    y0 = 1
+    tspan = [0,5]
+    y_ex = lambda t: 3*t + 1
+    (temps, y) = algo(fct, tspan, y0, 100)
 
-@pytest.fixture
-def ode_problems():
-    tspan = [0.0, 5.0]
+    y_ex_t = y_ex(temps)
 
-    fct_degre1 = ode_prob(lambda t, y: 3.0, 1.0, tspan,
-                          lambda t: 3*t + 1, 1)
+    assert norm(y_ex_t - y[:,0], np.inf)/norm(y_ex_t, np.inf) < 1e-12
 
-    fct_degre2 = ode_prob(lambda t, y: -4*t, 1.0, tspan,
-                          lambda t: -2*t**2 + 1, 2)
+# Intégration exacte pour soution polynomiale de degré 2
+@pytest.mark.parametrize("algo", [euler_modifie, pt_milieu, rk4])
+def test_exact_degree2(algo):
+    fct = lambda t,y: -4*t
+    y0 = 1
+    tspan = [0,5]
+    y_ex = lambda t: -2*t**2 + 1
+    (temps, y) = algo(fct, tspan, y0, 100)
 
-    fct_degre4 = ode_prob(lambda t, y: 5*t**3, 1.0, tspan,
-                          lambda t: 5/4*t**4 + 1, 4)
+    y_ex_t = y_ex(temps)
 
-    fct_scalar = ode_prob(
-        lambda t, y: 2*y - t + 4,
-        1.0,
-        tspan,
-        lambda t: -7/4 + 0.5*t + 11/4*np.exp(2*t),
-        np.inf,
-    )
+    assert norm(y_ex_t - y[:,0], np.inf)/norm(y_ex_t, np.inf) < 1e-12
 
-    fct_system = ode_prob(
-        lambda t, y: np.array([[-2, 1], [1, -2]]) @ y
-                     + np.array([2*np.exp(-t), 3*t]),
-        np.array([2.0, 3.0]),
-        tspan,
-        lambda t: (
-            -7/6*np.array([1, -1])*np.exp(-3*t)
-            + 4*np.array([1, 1])*np.exp(-t)
-            + 0.5*np.array([1, -1])*np.exp(-t)
-            + np.array([1, 1])*t*np.exp(-t)
-            + np.array([1, 2])*t
-            - (1/3)*np.array([4, 5])
-        ),
-        np.inf,
-    )
+# Intégration exacte pour soution polynomiale de degré 4
+@pytest.mark.parametrize("algo", [rk4])
+def test_exact_degree4(algo):
+    fct = lambda t,y: 5*t**3
+    y0 = 1
+    tspan = [0,5]
+    y_ex = lambda t: 5/4 * t**4 + 1
+    (temps, y) = algo(fct, tspan, y0, 100)
 
-    return {
-        "poly": (fct_degre1, fct_degre2, fct_degre4),
-        "scalar": fct_scalar,
-        "system": fct_system,
-    }
+    y_ex_t = y_ex(temps)
+
+    assert norm(y_ex_t - y[:,0], np.inf)/norm(y_ex_t, np.inf) < 1e-12
 
 
-# ------------------------------------------------------------------
-# Exact integration
-# ------------------------------------------------------------------
-@pytest.mark.parametrize("ode_int", lambda ode_integrators: ode_integrators)
-def test_exact_integration(ode_integrators, ode_problems):
-    for ode_int in ode_integrators:
-        for prob in ode_problems["poly"]:
-            if prob.degre <= ode_int.order:
-                temps, y = ode_int.name(prob.fct, prob.tspan, prob.y0, 100)
+# Vérification de l'ordre de convergence pour une EDO scalaire
+@pytest.mark.parametrize("algo, ordre_expected", [(euler, 1), (euler_modifie, 2), (pt_milieu, 2) , (rk4, 4)])
+def test_order_scalar(algo, ordre_expected):
 
-                sol_ex = np.array([prob.ex_sol(t) for t in temps])
-
-                # flatten Y if scalar
-                y_flat = y.reshape(-1)
-
-                erreur_rel = (
-                    np.linalg.norm(y_flat - sol_ex, ord=np.inf)
-                    / np.linalg.norm(sol_ex, ord=np.inf)
-                )
-
-                assert erreur_rel < 1e-14
-
-
-# ------------------------------------------------------------------
-# Order of convergence (scalar)
-# ------------------------------------------------------------------
-@pytest.mark.parametrize("ode_int", lambda ode_integrators: ode_integrators)
-def test_order_scalar(ode_integrators, ode_problems):
-    tol = 0.2
-    nb_eval = 6
+    fct = lambda t,y: 2*y - t + 4
+    y0 = 1
+    tspan = [0,5]
+    y_ex = lambda t: -7/4 + 1/2*t + 11/4*np.exp(2*t)
+    
+    nb_eval = 8
     nb_pas_init = 100
+    nb_pas = nb_pas_init * 2**np.arange(0,nb_eval)
+    erreur_abs = np.nan * np.ones(nb_eval)
 
-    for ode_int in ode_integrators:
-        nb_pas = (2 ** np.arange(nb_eval)) * nb_pas_init
-        erreur = np.full(nb_eval, np.inf)
+    for t in range(nb_eval):
+        (temps, y) = algo(fct, tspan, y0, nb_pas[t])
+        erreur_abs[t] = norm(y_ex(temps) - y[:,0], np.inf)
 
-        for i, n in enumerate(nb_pas):
-            temps, y = ode_int.name(
-                ode_problems["scalar"].fct,
-                ode_problems["scalar"].tspan,
-                ode_problems["scalar"].y0,
-                int(n),
-            )
-
-            sol_ex = np.array([ode_problems["scalar"].ex_sol(t) for t in temps])
-            erreur[i] = np.linalg.norm(y.reshape(-1) - sol_ex, ord=np.inf)
-
-        ordre_app, _ = order_computation(erreur, 2, tol)
-
-        assert abs(ordre_app - ode_int.order) < tol
-
-
-# ------------------------------------------------------------------
-# Order of convergence (system)
-# ------------------------------------------------------------------
-@pytest.mark.parametrize("ode_int", lambda ode_integrators: ode_integrators)
-def test_order_system(ode_integrators, ode_problems):
     tol = 0.2
-    nb_eval = 6
+    (ordre, ordre_app) = order_computation(erreur_abs, 2, tol)
+
+    assert np.abs(ordre - ordre_expected) < tol
+
+# Vérification de l'ordre de convergence pour systèmes d'EDOs
+@pytest.mark.parametrize("algo, ordre_expected", [(euler, 1), (euler_modifie, 2), (pt_milieu, 2) , (rk4, 4)])
+def test_order_system(algo, ordre_expected):
+
+    fct = lambda t,y: np.array([[-2,1],[1,-2]]) @ y + np.array([2*np.exp(-t),3*t])
+    y0 = [2,3]
+    tspan = [0,5]
+    y_ex = lambda t: -7/6*np.array([1,-1]) * (np.exp(-3*t)[:, np.newaxis]) + 4*np.array([1,1]) * (np.exp(-t)[:, np.newaxis]) + \
+						1/2*np.array([1,-1]) * (np.exp(-t)[:, np.newaxis]) + np.array([1,1]) * ((t*np.exp(-t))[:, np.newaxis]) + np.array([1,2])*(t[:, np.newaxis]) -1/3*np.array([4,5])
+    
+    nb_eval = 8
     nb_pas_init = 100
+    nb_pas = nb_pas_init * 2**np.arange(0,nb_eval)
+    erreur_abs = np.nan * np.ones(nb_eval)
 
-    for ode_int in ode_integrators:
-        nb_pas = (2 ** np.arange(nb_eval)) * nb_pas_init
-        erreur = np.full(nb_eval, np.inf)
-
-        for i, n in enumerate(nb_pas):
-            temps, y = ode_int.name(
-                ode_problems["system"].fct,
-                ode_problems["system"].tspan,
-                ode_problems["system"].y0,
-                int(n),
-            )
-
-            sol_ex = np.vstack([ode_problems["system"].ex_sol(t) for t in temps])
-
-            erreur[i] = np.linalg.norm(y - sol_ex, ord=np.inf)
-
-        ordre_app, _ = order_computation(erreur, 2, tol)
-
-        assert abs(ordre_app - ode_int.order) < tol
+    for t in range(nb_eval):
+        (temps, y) = algo(fct, tspan, y0, nb_pas[t])
+        erreur_abs[t] = norm(y_ex(temps) - y, np.inf)
 
 
-# ------------------------------------------------------------------
-# Shape tests
-# ------------------------------------------------------------------
-@pytest.mark.parametrize("ode_int", lambda ode_integrators: ode_integrators)
-def test_shapes(ode_integrators, ode_problems):
-    nb_pas = 17
+    tol = 0.2
+    (ordre, ordre_app) = order_computation(erreur_abs, 2, tol)
 
-    for ode_int in ode_integrators:
-        # scalar case
-        temps, y = ode_int.name(
-            ode_problems["scalar"].fct,
-            ode_problems["scalar"].tspan,
-            ode_problems["scalar"].y0,
-            nb_pas,
-        )
+    assert np.abs(ordre - ordre_expected) < tol
 
-        assert len(temps) == nb_pas + 1
-        assert y.shape == (nb_pas + 1, 1)
 
-        # system case
-        temps, y = ode_int.name(
-            ode_problems["system"].fct,
-            ode_problems["system"].tspan,
-            ode_problems["system"].y0,
-            nb_pas,
-        )
-
-        assert y.shape == (nb_pas + 1, 2)

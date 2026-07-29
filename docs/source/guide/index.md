@@ -21,3 +21,13 @@ La documentation de la librairie numérique MTH2210 est disponible aux pages sui
 non_linear
 edo
 ```
+
+## Exemple - Laboratoire 0
+
+Le notebook Jupyter du laboratoire 0 est disponible à la page suivante
+
+```{toctree}
+:maxdepth: 1
+
+laboratoire0
+```

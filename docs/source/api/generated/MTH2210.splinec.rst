@@ -1,0 +1,6 @@
+﻿MTH2210.splinec
+===============
+
+.. currentmodule:: MTH2210
+
+.. autofunction:: splinec
