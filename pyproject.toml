@@ -13,7 +13,7 @@ maintainers = [
 requires-python = ">=3.10"
 dependencies = [
     "numpy==2.2.2",
-    "scipy==1.18.0"]
+    "scipy==1.17.1"]
 
 [project.optional-dependencies]
 notebook = ["ipykernel==7.2.0",
