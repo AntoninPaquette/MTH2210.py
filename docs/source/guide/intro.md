@@ -1,40 +1,3 @@
-# Introduction à Python
-
-**Documentation de Python:** [Version stable](https://docs.python.org/3/)
-
-Le tutoriel qui suit se veut une brève introduction à Python.
-
-## Création de fonctions
-
-```{eval-rst}
-.. jupyter-execute::
-
-    x = [1,2,3,4,5]
-    x[0]
-```
-
-## Indexation sous Python
-
-L'indexation sous Python suis certaines règles spécifiques. Le premier élément est indéxé par 0.
-
-```{eval-rst}
-.. jupyter-execute::
-
-    x = [1,2,3,4,5]
-    x[0]
-```
-
-Le dernier élément est indéxé par -1
-
-```{eval-rst}
-.. jupyter-execute::
-
-    x = [1,2,3,4,5]
-    x[-1]
-```
-
-
-
 # Introduction à Numpy
 
 **Documentation de Numpy:** [Version stable](https://numpy.org/doc/stable/)
@@ -46,6 +9,7 @@ Le dernier élément est indéxé par -1
 
     import numpy as np
     x = np.array([[1,2],[3,4],[5,6]])
+    x
 ```
 
 

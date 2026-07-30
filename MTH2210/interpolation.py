@@ -57,7 +57,9 @@ def lagrange(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike):
 
     Examples
     --------
-
+    >>> import numpy as np
+    >>> from MTH2210 import lagrange 
+    >>> Lx = lagrange([1,2,4,5], [1,9,2,11], np.linspace(1,5))
 
     References
     ----------
@@ -116,17 +118,19 @@ def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.Arra
         Points où le polynôme de Lagrange sera évalué
     type_S : Arraylike de dimension 1 avec 2 éléments
         Vecteur de 2 éléments contenant le type des conditions frontieres imposees en x0 et xn. Les choix possibles sont:
-		- [1,1] -> Spline naturelle 
-		- [2,2] -> Spline avec courbure prescrite
-		- [3,3] -> Spline avec courbure constante
-		- [4,4] -> Spline avec pente prescrite
-		- [i,j] -> Spline avec condition i imposee en x0 et condition j imposee en xn
+
+		* [1,1] -> Spline naturelle 
+		* [2,2] -> Spline avec courbure prescrite
+		* [3,3] -> Spline avec courbure constante
+		* [4,4] -> Spline avec pente prescrite
+		* [i,j] -> Spline avec condition i imposee en x0 et condition j imposee en xn
     val_S : Arraylike de dimension 1 avec 2 éléments
         Vecteur de 2 éléments contenant les deux conditions limites imposées en x0 et xn. Les choix possibles sont:
-		- Si type_S(1) = 1 ou 3, alors val_S(1) = nan
-		- Si type_S(1) = 2 ou 4, alors val_S(1) = a, où a représente resp. la courbure ou la pente en x0
-		- Si type_S(2) = 1 ou 3, alors val_S(1) = nan
-		- Si type_S(2) = 2 ou 4, alors val_S(1) = b, où b représente resp. la courbure ou la pente en xn
+        
+		* Si type_S(1) = 1 ou 3, alors val_S(1) = nan
+		* Si type_S(1) = 2 ou 4, alors val_S(1) = a, où a représente resp. la courbure ou la pente en x0
+		* Si type_S(2) = 1 ou 3, alors val_S(1) = nan
+		* Si type_S(2) = 2 ou 4, alors val_S(1) = b, où b représente resp. la courbure ou la pente en xn
 
     Returns
     -------

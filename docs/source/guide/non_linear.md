@@ -36,6 +36,11 @@ positive de $f(x) = x^2 - 10$. On définit tout d'abord la fonction $f$:
     
     import numpy as np
     import matplotlib.pyplot as plt
+    import pandas as pd
+
+    from IPython.display import HTML
+
+    pd.set_option("float_format", "{:.15e}".format)
 
     from MTH2210 import bissection, secante, newton1d, ptfixe
 
@@ -69,7 +74,7 @@ La méthode des points-fixes peut aussi être employée pour approximer
 $\sqrt{10}$. On considère la fonction $g(x) = -\frac{x^2}{10} + x+ 1$ dont
 un point-fixe attractif est $\sqrt{10}$
 
-<!-- ```{eval-rst}
+```{eval-rst}
 .. jupyter-execute::
     
     def fct_g(x):
@@ -77,7 +82,7 @@ un point-fixe attractif est $\sqrt{10}$
         return g
 
     (approx_fixe , err_fixe) = ptfixe(fct_g , x0 , 50 , 1e-9)
-``` -->
+```
 
 
 On peut ensuite afficher l'évolution des erreurs selon l'itération. 
@@ -98,38 +103,30 @@ On peut ensuite afficher l'évolution des erreurs selon l'itération.
 
 Les tableaux des ratios des erreurs peuvent aussi être produits pour les
 méthodes des points-fixes, de la sécante et de Newton:
-<!--
-```@example 1
-ratio_fixe_1 = err_fixe[2:end] ./ err_fixe[1:end-1]
-ratio_fixe_a = err_fixe[2:end] ./ err_fixe[1:end-1] .^ ((1+sqrt(5))/2)
-ratio_fixe_2 = err_fixe[2:end] ./ err_fixe[1:end-1] .^ 2
 
-ratio_sec_1 = err_sec[2:end] ./ err_sec[1:end-1]
-ratio_sec_a = err_sec[2:end] ./ err_sec[1:end-1] .^ ((1+sqrt(5))/2)
-ratio_sec_2 = err_sec[2:end] ./ err_sec[1:end-1] .^ 2
+```{eval-rst}
+.. jupyter-execute::
 
-ratio_new_1 = err_new[2:end] ./ err_new[1:end-1]
-ratio_new_a = err_new[2:end] ./ err_new[1:end-1] .^ ((1+sqrt(5))/2)
-ratio_new_2 = err_new[2:end] ./ err_new[1:end-1] .^ 2
+    ratio_fixe_1 = err_fixe[1:] / err_fixe[:-1]
+    ratio_fixe_a = err_fixe[1:] / err_fixe[:-1] ** ((1+np.sqrt(5))/2)
+    ratio_fixe_2 = err_fixe[1:] / err_fixe[:-1] ** 2
 
-@printf("Ratio des erreurs pour points-fixes\n")
-@printf("e_{n+1}/e_{n}           e_{n+1}/e_{n}^a         e_{n+1}/e_{n}^2\n")
-for t=1:length(ratio_fixe_1)
-    @printf("%16.15e   %16.15e   %16.15e\n", ratio_fixe_1[t] , ratio_fixe_a[t] , ratio_fixe_2[t])
-end
-@printf("\n\nRatio des erreurs pour la sécante\n")
-@printf("e_{n+1}/e_{n}           e_{n+1}/e_{n}^a         e_{n+1}/e_{n}^2\n")
-for t=1:length(ratio_sec_1)
-    @printf("%16.15e   %16.15e   %16.15e\n", ratio_sec_1[t] , ratio_sec_a[t] , ratio_sec_2[t])
-end
-@printf("\n\nRatio des erreurs pour Newton\n")
-@printf("e_{n+1}/e_{n}           e_{n+1}/e_{n}^a         e_{n+1}/e_{n}^2\n")
-for t=1:length(ratio_new_1)
-    @printf("%16.15e   %16.15e   %16.15e\n" , ratio_new_1[t] , ratio_new_a[t] , ratio_new_2[t])
-end
+    ratio_sec_1 = err_sec[1:] / err_sec[:-1]
+    ratio_sec_a = err_sec[1:] / err_sec[:-1] ** ((1+np.sqrt(5))/2)
+    ratio_sec_2 = err_sec[1:] / err_sec[:-1] ** 2
+
+    ratio_new_1 = err_new[1:] / err_new[:-1]
+    ratio_new_a = err_new[1:] / err_new[:-1] ** ((1+np.sqrt(5))/2)
+    ratio_new_2 = err_new[1:] / err_new[:-1] ** 2
+
+    # Données à affichées dans un dictionnaire
+    data_ptfixe = {"n": np.arange(len(ratio_fixe_1))+1, "e_n/e_{n+1}": ratio_fixe_1, "e_n/e_{n+1}^alpha": ratio_fixe_a, "e_n/e_{n+1}^2": ratio_fixe_2}
+    data_ptfixe_panda = pd.DataFrame(data_ptfixe).style.set_caption("Monthly Sales Performance")
+
+    HTML(data_ptfixe_panda.to_html())
 ```
 
 On constate, tel qu'attendu, que la méthode de la sécante converge au nombre
 d'or ``\frac{1+ \sqrt{5}}{2}``, que la méthode de Newton converge à l'ordre 2
 et que la méthode des points-fixes converge à l'ordre 1 et à un taux de
-convergence de ``-\frac{2\sqrt{10}}{10}+1``. -->
+convergence de ``-\frac{2\sqrt{10}}{10}+1``.

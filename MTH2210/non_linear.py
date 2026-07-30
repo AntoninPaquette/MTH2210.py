@@ -155,10 +155,8 @@ def bissection(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
 
 def secante(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
     """
-    Résolution d'une équation non-linéaire de forme ``f(x)=0`` avec la méthode
-    de la sécante:
-
-    ``x_{n+1} = x_n - \\frac{f(x_n)\\left(x_{n}-x_{n-1}\\right)}{f(x_n)-f(x_{n-1})}``
+    Résolution d'une équation non-linéaire de forme f(x)=0 avec la méthode
+    de la sécante
 
     Parameters
     ----------
@@ -310,13 +308,30 @@ def ptfixe(fct:Callable, x0:float, nb_it_max:int, tol_rel:float):
     """ 
     Methode des points-fixes pour la resolution de f(x) = x
 
+    Parameters
+    ----------
+    fct : Callable
+        Fonction f pour laquelle on cherche la racine
+    x0 : float 
+        Approximation initiale du point-fixe
+    nb_it_max : int
+       Nombre maximum d'itérations
+    tol_rel : float
+       Tolérance sur l'approximation de l'erreur relative
+
+    Returns
+    -------
+    approx : 1D ndarray de taille nb_iter 
+        1D array contenant les itérations
+    err_abs : 1D ndarray de taille nb_iter 
+        1D array contenant les erreurs absolues
+
     See Also
     --------
     bissection : Méthode de la bissection
     secante : Méthode de la sécante
     newton1d : Méthode de Newton en 1D
     newtonNd : Méthode de Newton en N dimension
-
     """
 
     _init_non_linear(fct, x0, nb_it_max, tol_rel)

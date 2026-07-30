@@ -1,9 +1,12 @@
 # Guide
 
+Ce guide suppose que l'étudiant possède une connaisance minimale de Python. Ce guide est structuré ainsi:
 
-## Python, Numpy et Matplotlib
+1. Très brève présentation des fonctionnalités des librairies Numpy, Matplotlib et Pandas employées dans le cadre de ce cours
+2. Présentation de la librairie MTH2210 pour la résolution de problème d'interpolation, de problèmes non-linéaires et d'EDOs
+3. Exemple avec le Laboratoire 0
 
-Une introduction à Python, à la librairie Numpy ainsi qu'à la librairie Matplotlib est disponible à la page suivante:
+## Introduction à Numpy, Matplotlib et Pandas
 
 ```{toctree}
 :maxdepth: 1
@@ -18,13 +21,14 @@ La documentation de la librairie numérique MTH2210 est disponible aux pages sui
 ```{toctree}
 :maxdepth: 1
 
+interpolation
 non_linear
 edo
 ```
 
-## Exemple - Laboratoire 0
+Pour une description de chacune des fonctions, allez à la page [Indes des fonctions](index-fct)
 
-Le notebook Jupyter du laboratoire 0 est disponible à la page suivante
+## Exemple - Notebook Jupyter du Laboratoire 0
 
 ```{toctree}
 :maxdepth: 1

@@ -9,7 +9,8 @@
 project = 'MTH2210'
 author = 'Antonin Paquette-Rufiange, Pierre-Yves Bouchet'
 copyright = '2026, ' + author
-release = '0.0.1'
+release = '0.1'
+html_title = "Librairie MTH2210"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -19,15 +20,12 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    # 'myst_parser',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'matplotlib.sphinxext.plot_directive',
     'jupyter_sphinx',
     'myst_nb'
 ]
-
-
 
 autosummary_generate = True
 
@@ -36,7 +34,6 @@ myst_enable_extensions = [
     "amsmath",
     "dollarmath",
 ]
-
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -54,13 +51,4 @@ html_css_files = ['custom.css']
 plot_html_show_formats = False
 plot_html_show_source_link = False
 
-
-
-# html_sidebars = {
-#     '**': [
-#         "sidebar-collapse", 
-#         "sidebar-nav-bs",
-#         'globaltoc.html',
-#     ]
-# }
-
+autodoc_typehints = 'description' 

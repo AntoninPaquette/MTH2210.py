@@ -66,7 +66,7 @@ def euler(
 
     Parameters
     ----------
-    f : Callable
+    fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
     tspan : ArrayLike de taille 2
         Intervalle de temps [t0, tf]
@@ -147,7 +147,7 @@ def euler_modifie(
 
     Parameters
     ----------
-    f : Callable
+    fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
     tspan : ArrayLike de taille 2
         Intervalle de temps [t0, tf]
@@ -228,7 +228,7 @@ def euler_modifie(
 
     Parameters
     ----------
-    f : Callable
+    fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
     tspan : ArrayLike de taille 2
         Intervalle de temps [t0, tf]
@@ -309,7 +309,7 @@ def pt_milieu(
 
     Parameters
     ----------
-    f : Callable
+    fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
     tspan : ArrayLike de taille 2
         Intervalle de temps [t0, tf]

@@ -1,36 +1,32 @@
+[![CI](https://github.com/AntoninPaquette/MTH2210.py/actions/workflows/ci.yml/badge.svg)](https://github.com/AntoninPaquette/MTH2210.py/actions/workflows/ci.yml)
+[![Documentation](https://github.com/AntoninPaquette/MTH2210.py/actions/workflows/docs.yml/badge.svg)](https://antoninpaquette.github.io/MTH2210.py)
+
 # MTH2210
 
 Bibliothèque numérique Python pour le cours MTH2210 de Polytechnique Montréal.
 
-## Installation
+## Installation minimale
 
-1. Installez Python et Jupyter Notebook. La méthode suggérée est de passer par Anaconda :
-* Installez la suite "Anaconda" (https://www.anaconda.com/products/distribution);
-* Lancez Anaconda;
-* Vérifiez que le logiciel "Jupyter" est bien installé.
+Dans le cadre de ce cours, nous vous reccomandons cette installation minimale:
 
-2. Téléchargez le module sur GitHub (https://github.com/amontoison/MTH2210.py) :
-* Cliquez sur le bouton "Code", de couleur verte;
-* Sélectionnez "Download ZIP";
-* Enregistrez l'archive ZIP dans le dossier que vous souhaitez, et dézippez la;
-* Vérifiez que vous avez en local sur votre machine tout le contenu trouvé sur le lien GitHub.
-
-3. Ouvrez le notebook "module_install_help.ipynb" :
-* Lancez Anaconda;
-* Dans Anaconda, lancez Jupyter;
-* Dans Jupyter, allez dans le dossier dans lequel vous avez dézippé l'archive et ouvrez le notebook "module_install_help.ipynb".
-
-4. Installez le module en local sur votre machine :
-* Décommentez les lignes de code dans la première cellule du notebook "module_install_help.ipynb";
-* Exécutez la cellule;
-* Testez si le module est bien installé en exécutant les autres cellules.
+1. Installation de Python soit via Anaconda ou via Miniconda [https://www.anaconda.com/docs/getting-started/installation](https://www.anaconda.com/docs/getting-started/installation)
+2. Installation de Visual Studio Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+3. Installation de l'extension Python de VSCode [https://code.visualstudio.com/docs/python/python-quick-start](https://code.visualstudio.com/docs/python/python-quick-start)
+4. Installation de l'extension Jupyter de VSCode [https://code.visualstudio.com/docs/datascience/jupyter-notebooks](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
+5. Création d'un environnement virtuel dans un dossier approprié sur votre machine. Nous recommandons de créer cet environnement virtuel via VSCode en suivant les étapes décrites au lien suivant: [https://code.visualstudio.com/docs/python/environments](https://code.visualstudio.com/docs/python/environments)
+6. Installation de la librairie MTH2210. Pour installer la librairie, assurez vous tout d'abord que l'environnement virtuel est activé, puis installer la librairie avec la commande suivante (dans la console de VSCode) 
+```
+pip install git+https://github.com/AntoninPaquette/MTH2210.py.git[notebook]
+```   
 
 
-## Syntaxe
 
-Les fonctions de la bibliothèque viennent toutes avec un descriptif détaillé de leur utilisation. Vous pouvez également aller voir le notebook "module_install_help.ipynb", qui contient des exemples d'appels à chacune des fonctions.
 
-Également, le lien suivant donne des conversions simples entre les commandes de base de MatLab et celles de Python. Plus précisément, le module "Numpy" sert à faire les conversions.
+## Documentation
+
+La documentation de la librairie est disponible à ce lien [Documentation](https://antoninpaquette.github.io/MTH2210.py/). Cette documentation contient une très brève introduction des fonctionalités de Numpy, Matplotlib et Pandas utlisées dans le cadre de ce cours. La documentation contient aussi toute l'information concernant les fonctions de la librairie MTH2210. 
+
+Également, le lien suivant donne des conversions simples entre les commandes de base de MatLab et celles de Python. 
 
 [MATLAB–Python–Julia cheatsheet](https://cheatsheets.quantecon.org/)
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MTH2210"
-version = "0.0.1"
+version = "0.1"
 authors = [{name = "Antonin Paquette-Rufiange"},
             {name = "Pierre-Yves Bouchet"}]
 maintainers = [
@@ -12,13 +12,13 @@ maintainers = [
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "matplotlib==3.10",
     "numpy==2.2.2",
-    "pandas==3.0",
     "scipy==1.18.0"]
 
 [project.optional-dependencies]
-notebook = ["ipykernel==7.2.0"]
+notebook = ["ipykernel==7.2.0",
+            "matplotlib==3.10",
+            "pandas==3.0"]
 test = ["pytest==9.0.3"]
 docs = ["sphinx==9.1","myst-parser==5.0.0","pydata-sphinx-theme==0.17.0","jupyter-sphinx==0.5.3", "myst-nb==1.4.0"]
 dev = ["MTH2210[notebook,test,docs]"]
