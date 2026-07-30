@@ -20,7 +20,7 @@ notebook = ["ipykernel==7.2.0",
             "matplotlib==3.10",
             "pandas==3.0"]
 test = ["pytest==9.0.3"]
-docs = ["sphinx==9.1","myst-parser==5.0.0","pydata-sphinx-theme==0.17.0","jupyter-sphinx==0.5.3", "myst-nb==1.4.0", "matplotlib==3.10"]
+docs = ["sphinx==9.1","myst-parser==5.0.0","pydata-sphinx-theme==0.17.0","jupyter-sphinx==0.5.3", "myst-nb==1.4.0"]
 dev = ["MTH2210[notebook,test,docs]"]
 
 [tool.pytest.ini_options]
