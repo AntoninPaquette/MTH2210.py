@@ -9,18 +9,19 @@ authors = [{name = "Antonin Paquette-Rufiange"}]
 maintainers = [
   {name = "Antonin Paquette-Rufiange", email = "antonin.paquette-rufiange@polymtl.ca"}
 ]
+license = "MIT"
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=2.4.0",
-    "scipy>=1.17.1"]
+    "scipy>=1.17.1",
+    "ipykernel>=7.2.0",
+    "matplotlib>=3.10.6",
+    "pandas[output-formatting]>=3.0"]
 
 [project.optional-dependencies]
-notebook = ["ipykernel>=7.2.0",
-            "matplotlib>=3.10.6",
-            "pandas[output-formatting]>=3.0"]
 test = ["pytest==9.0.3"]
 docs = ["sphinx==9.1","myst-parser==5.0.0","pydata-sphinx-theme==0.17.0","jupyter-sphinx==0.5.3", "myst-nb==1.4.0"]
-dev = ["MTH2210[notebook,test,docs]"]
+dev = ["MTH2210[test,docs]"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
