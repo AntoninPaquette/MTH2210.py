@@ -2,18 +2,33 @@
 
 Ce site web contient la documentation de la librairie numérique MTH2210 de Polytechnique Montréal. 
 
-## Installation minimale
+## Mise en place
 
-Dans le cadre de ce cours, nous vous reccomandons cette installation minimale:
+Voici les étapes à suivre afin d'obtenir une installation minimale vous permettant de réaliser les laboratoires:
 
-1. Installation de Python soit via Anaconda ou via Miniconda [https://www.anaconda.com/docs/getting-started/installation](https://www.anaconda.com/docs/getting-started/installation)
-2. Installation de Visual Studio Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
-3. Installation de l'extension Python de VSCode [https://code.visualstudio.com/docs/python/python-quick-start](https://code.visualstudio.com/docs/python/python-quick-start)
-4. Installation de l'extension Jupyter de VSCode [https://code.visualstudio.com/docs/datascience/jupyter-notebooks](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
-5. Création d'un environnement virtuel dans un dossier approprié sur votre machine. Nous recommandons de créer cet environnement virtuel via VSCode en suivant les étapes décrites au lien suivant: [https://code.visualstudio.com/docs/python/environments](https://code.visualstudio.com/docs/python/environments)
-6. Installation de la librairie MTH2210. Pour installer la librairie, assurez vous tout d'abord que l'environnement virtuel est activé, puis installer la librairie avec la commande suivante (dans la console de VSCode) 
+### Étape 1 - Installation d'Anaconda
+
+1. Installez Anaconda en suivant les étapes sur le site web [https://www.anaconda.com/docs/getting-started/installation](https://www.anaconda.com/docs/getting-started/installation)
+
+### Étape 2 - Création de l'environnement "mth2210"
+1. Lancez le programme Anaconda Navigator
+2. Cliquez sur l'onglet 'Environments' puis créez un nouvel environnement en cliquant sur le bouton 'Create'. Nommez cet environnement 'mth2210' et choissisez le 'Packages' Python version 3.14.
+3. Retournez sur l'onglet 'Home' d'Anaconda Navigator. Une liste défilante des environnments est visible vers le haut de la fenêtre. Cliquez sur cette liste et choisissez l'environnement 'mth2210' précédemment créé. Il est bien important de ne pas choisir l'environnement 'base (root)', car on ne peut garantir qu'il n'y aura pas de conflits entre les différentes librairies.
+4. Cherchez l'application Jupyter Notebook et cliquez sur le bouton 'Install'. 
+
+### Installation de la librairie MTH2210.py
+
+1. Créez un dossier sous votre machine
+
+## Réalisation des laboratoires
+
+1. Lancez le programme Anaconda Navigator
+2. Assurez vous que l'environnement 'mth2210' est sélectionné et lancez l'application Jupyter notebook.
+3. Déplacez vos dans le dossier sur votre ordinateur contenant les gabarits des laboratoires
+4. Réalisez le laboratoires en vous assurant d'inscrire vos noms et matricules
+
 ```
-pip install 'MTH2210[notebook] @ git+https://github.com/AntoninPaquette/MTH2210.py.git'
+pip install "MTH2210[notebook] @ git+https://github.com/AntoninPaquette/MTH2210.py.git"
 ```   
 
 ## Guide

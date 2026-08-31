@@ -188,8 +188,8 @@ def secante(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import bissection
-    >>> (approx, err_abs) = secante(lambda x:x**2-2, 0, 2 , 200, 1e-6)
+    >>> from MTH2210 import secante
+    >>> (approx, err_abs) = secante(lambda x:x**2-2, 0, 2 , 50, 1e-6)
     """
 
     _init_non_linear(fct, x0, nb_it_max, tol_rel, x1=x1)
@@ -267,7 +267,7 @@ def newton1d(fct:Callable, dfct:Callable, x0:float, nb_it_max:int, tol_rel:float
     --------
     >>> import numpy as np
     >>> from MTH2210 import newton1d
-    >>> (approx, err_abs) = newton1d(lambda x:x**2-2, lambda x: 2*x, 0.1, 50, 1e-9)
+    >>> (approx, err_abs) = newton1d(lambda x:x**2-2, lambda x: 2*x, 0.1, 50, 1e-6)
     """
 
     _init_non_linear(fct, x0, nb_it_max, tol_rel, dfct=dfct)
@@ -332,6 +332,12 @@ def ptfixe(fct:Callable, x0:float, nb_it_max:int, tol_rel:float):
     secante : Méthode de la sécante
     newton1d : Méthode de Newton en 1D
     newtonNd : Méthode de Newton en N dimension
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from MTH2210 import ptfixe
+    >>> (approx, err_abs) = ptfixe(lambda x : -x**2/10 + x + 1, 4, 50, 1e-6)
     """
 
     _init_non_linear(fct, x0, nb_it_max, tol_rel)
@@ -365,12 +371,59 @@ def newtonNd(fct:Callable, x0:npt.ArrayLike, nb_it_max:int, tol_rel:float, h:flo
     """ 
     Methode de Newton pour la resolution de F(x) = 0, pour F: R^n -> R^n
 
+    Parameters
+    ----------
+    fct : Callable
+        Fonction f pour laquelle on cherche la racine. Cette fonction doit prendre 
+        en entrée un vecteur de taille n et retourner un vecteur de taille n
+    x0 : 1D ndarray de taille n 
+        Approximation initiale du problème de racine
+    nb_it_max : int
+        Nombre maximum d'itérations
+    tol_rel : float
+        Tolérance sur l'approximation de l'erreur relative
+    h : float (optionnel)
+        Pas h des différences centrées d'ordre 2 employées afin d'approximer la matrice jacobienne de fct
+        Soit le paramètre h ou dfct doit être fournis en entrée
+    dfct : Callable (optionnel)
+        Fonction prenant en entrée un vectuer de dimension n et retournant la matrice jacobienne de fct
+        Soit le paramètre h ou dfct doit être fournis en entrée
+
+    Returns
+    -------
+    approx : 2D ndarray de taille nb_iter x n 
+        2D array contenant les itérations. La rangée i correspond à l'approximation obtenue 
+        à l'itération i
+    err_abs : 1D ndarray de taille nb_iter 
+        1D array contenant les erreurs absolues
+
     See Also
     --------
     bissection : Méthode de la bissection
     secante : Méthode de la sécante
     ptfixe : Méthode des points-fixes
     newton1d : Méthode de Newton en 1D
+
+    Examples
+    --------
+
+    Exemple avec le paramètre h
+
+    >>> import numpy as np
+    >>> from MTH2210 import newtonNd
+    >>> def fct(x):
+    >>>     return np.array([x[0]**2 + x[1]**2 -1,-x[0]**2 + x[2]])    
+    >>> (approx, err_abs) = newtonNd(fct, np.array([1,1]), 20, 1e-6, h=1e-3)
+
+    Exemple avec la matrice jacobienne
+
+    >>> import numpy as np
+    >>> from MTH2210 import newtonNd
+    >>> def fct(x):
+    >>>     return np.array([x[0]**2 + x[1]**2 -1,-x[0]**2 + x[2]])
+    >>> def dfct(x):
+    >>>     return np.array([[2*x[0], 2*x[1]],[-2*x[0],1]])
+    >>> (approx, err_abs) = newtonNd(fct ,np.array([1,1]), 20, 1e-6, dfct = dfct)
     """
 
     try:
