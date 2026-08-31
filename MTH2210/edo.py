@@ -51,24 +51,15 @@ def euler(
     tspan: npt.ArrayLike,
     Y0: npt.ArrayLike,
     nbpas: int,
-) -> Tuple[ArrayFloat, ArrayFloat]:
+):
     """
     Résout numériquement une équation différentielle ordinaire par la méthode d'Euler explicite.
-
-    Cette fonction approxime la solution de l'EDO :
-        dx/dt = f(t, x)
-        x(t_0) = x_0
-    à l'aide du schéma d'Euler :
-        x_{k+1} = x_k + h * f(t_k, x_k)
-        t_{k+1} = t_k + h
-
-    où h = (t_m - t_0) / m.
 
     Parameters
     ----------
     fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
-    tspan : ArrayLike de taille 2
+    tspan : 1D ArrayLike de taille 2
         Intervalle de temps [t0, tf]
     Y0 : ArrayLike
         Condition initiale à l'instant `t0`. 
@@ -84,7 +75,8 @@ def euler(
         Vecteur des pas de temps
     Y : ndarray de dimension (nbpas +1, N)
         Approximation de la solution de l'EDO au pas de temps spécifié par `temps`
-        - Y[0] = Y)
+
+        - Y[0] = Y
         - Y[k] est l'approximation au temps `temps[k]`
 
     See Also
@@ -136,20 +128,11 @@ def euler_modifie(
     """
     Résout numériquement une équation différentielle ordinaire par la méthode d'Euler modifié (méthode d'ordre 2).
 
-    Cette fonction approxime la solution de l'EDO :
-        dx/dt = f(t, x)
-        x(t_0) = x_0
-    à l'aide du schéma d'Euler modifié:
-        x_{k+1} = x_k + h * f(t_k, x_k)
-        t_{k+1} = t_k + h
-
-    où h = (t_f - t_0) / nbpas.
-
     Parameters
     ----------
     fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
-    tspan : ArrayLike de taille 2
+    tspan : 1D ArrayLike de taille 2
         Intervalle de temps [t0, tf]
     Y0 : ArrayLike
         Condition initiale à l'instant `t0`. 
@@ -213,24 +196,15 @@ def euler_modifie(
     tspan: npt.ArrayLike,
     Y0: npt.ArrayLike,
     nbpas: int,
-) -> Tuple[ArrayFloat, ArrayFloat]:
+):
     """
     Résout numériquement une équation différentielle ordinaire par la méthode d'Euler modifié (méthode d'ordre 2).
-
-    Cette fonction approxime la solution de l'EDO :
-        dx/dt = f(t, x)
-        x(t_0) = x_0
-    à l'aide du schéma d'Euler modifié:
-        x_{k+1} = x_k + h * f(t_k, x_k)
-        t_{k+1} = t_k + h
-
-    où h = (t_f - t_0) / nbpas.
 
     Parameters
     ----------
     fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
-    tspan : ArrayLike de taille 2
+    tspan : 1D ArrayLike de taille 2
         Intervalle de temps [t0, tf]
     Y0 : ArrayLike
         Condition initiale à l'instant `t0`. 
@@ -246,7 +220,8 @@ def euler_modifie(
         Vecteur des pas de temps
     Y : ndarray de dimension (nbpas +1, N)
         Approximation de la solution de l'EDO au pas de temps spécifié par `temps`
-        - Y[0] = Y)
+        
+        - Y[0] = Y
         - Y[k] est l'approximation au temps `temps[k]`
 
     See Also
@@ -294,24 +269,15 @@ def pt_milieu(
     tspan: npt.ArrayLike,
     Y0: npt.ArrayLike,
     nbpas: int,
-) -> Tuple[ArrayFloat, ArrayFloat]:
+):
     """
-    Résout numériquement une équation différentielle ordinaire par la méthode du point milieu(méthode d'ordre 2).
-
-    Cette fonction approxime la solution de l'EDO :
-        dx/dt = f(t, x)
-        x(t_0) = x_0
-    à l'aide du schéma d'Euler modifié:
-        x_{k+1} = x_k + h * f(t_k, x_k)
-        t_{k+1} = t_k + h
-
-    où h = (t_f - t_0) / nbpas.
+    Résout numériquement une équation différentielle ordinaire par la méthode du point milieu (méthode d'ordre 2).
 
     Parameters
     ----------
     fct : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
-    tspan : ArrayLike de taille 2
+    tspan : 1D ArrayLike de taille 2
         Intervalle de temps [t0, tf]
     Y0 : ArrayLike
         Condition initiale à l'instant `t0`. 
@@ -327,7 +293,8 @@ def pt_milieu(
         Vecteur des pas de temps
     Y : ndarray de dimension (nbpas +1, N)
         Approximation de la solution de l'EDO au pas de temps spécifié par `temps`
-        - Y[0] = Y)
+        
+        - Y[0] = Y
         - Y[k] est l'approximation au temps `temps[k]`
 
     See Also
@@ -376,24 +343,16 @@ def rk4(
     tspan: npt.ArrayLike,
     Y0: npt.ArrayLike,
     nbpas: int,
-) -> Tuple[ArrayFloat, ArrayFloat]:
+):
     """
-    Résout numériquement une équation différentielle ordinaire par la méthode d'Euler explicite.
+    Résout numériquement une équation différentielle ordinaire par la méthode de Runge-Kutta d'ordre 4.
 
-    Cette fonction approxime la solution de l'EDO :
-        dx/dt = f(t, x)
-        x(t_0) = x_0
-    à l'aide du schéma d'Euler :
-        x_{k+1} = x_k + h * f(t_k, x_k)
-        t_{k+1} = t_k + h
-
-    où h = (t_m - t_0) / m.
 
     Parameters
     ----------
     f : Callable
         Fonction définissant l'équation différentielle. Cette fonction doit prendre comme premier argument le temps `t` et comme deuxième argument la variable `x`. Cette fonction doit retourner de même dimension et type que `x`.
-    tspan : ArrayLike de taille 2
+    tspan : 1D ArrayLike de taille 2
         Intervalle de temps [t0, tf]
     Y0 : ArrayLike
         Condition initiale à l'instant `t0`. 
@@ -409,7 +368,8 @@ def rk4(
         Vecteur des pas de temps
     Y : ndarray de dimension (nbpas +1, N)
         Approximation de la solution de l'EDO au pas de temps spécifié par `temps`
-        - Y[0] = Y)
+        
+        - Y[0] = Y
         - Y[k] est l'approximation au temps `temps[k]`
 
     See Also
@@ -424,7 +384,7 @@ def rk4(
     Exemple 1D
 
     >>> import numpy as np
-    >>> from MTH2210 import euler
+    >>> from MTH2210 import rk4
     >>> (t,y) = rk4(lambda t, y: np.cos(t), [0,2], 1, 1000)
 
     Exemple ND inline

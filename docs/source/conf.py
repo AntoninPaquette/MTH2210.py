@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'MTH2210'
-author = 'Antonin Paquette-Rufiange, Pierre-Yves Bouchet'
+author = 'Antonin Paquette-Rufiange'
 copyright = '2026, ' + author
 release = '0.1'
 html_title = "Librairie MTH2210"

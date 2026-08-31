@@ -2,17 +2,16 @@
 
 Ce guide suppose que l'étudiant possède une connaisance minimale de Python. Ce guide est structuré ainsi:
 
-1. Très brève présentation des fonctionnalités des librairies Numpy, Matplotlib et Pandas employées dans le cadre de ce cours
-2. Présentation de la librairie MTH2210 pour la résolution de problème d'interpolation, de problèmes non-linéaires et d'EDOs
-3. Exemple avec le Laboratoire 0
+1. Présentation de la librairie MTH2210 pour la résolution de problème d'interpolation, de problèmes non-linéaires et d'EDOs
+2. Exemple avec le Laboratoire 0
 
-## Introduction à Numpy, Matplotlib et Pandas
+<!-- ## Introduction à Numpy, Matplotlib et Pandas
 
 ```{toctree}
 :maxdepth: 1
 
 intro
-```
+``` -->
 
 ## Librairie MTH2210
 
