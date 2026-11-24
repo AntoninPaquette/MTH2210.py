@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from numpy.linalg import norm
 
-from MTH2210 import lagrange, splinec
+from mth2210 import lagrange, splinec
 from tests.utils import order_computation
 
 @pytest.mark.parametrize("poly, degree", [(lambda x: (x-1)*(x+2.5)*(x-np.pi)*(x+11), 4), (lambda x: (x-2)**2 * (x+5)**3 * (x-np.exp(1))**4, 11)])

@@ -11,10 +11,10 @@ Le problème de recherche de racine $r \in \mathbb{R}^n$ d'une fonction $F:\math
 \end{align*}
 
 Les algorithmes disponibles pour trouver les racines d'une fonction $F$ sont:
-1. Bissection pour $n=1$ : {py:func}`MTH2210.bissection`,
-2. Sécante pour $n=1$ : {py:func}`MTH2210.secante`,
-3. Newton pour $n=1$ : {py:func}`MTH2210.newton1d`,
-4. Newton pour $n\geq 1$ : {py:func}`MTH2210.newtonNd`,
+1. Bissection pour $n=1$ : {py:func}`mth2210.bissection`,
+2. Sécante pour $n=1$ : {py:func}`mth2210.secante`,
+3. Newton pour $n=1$ : {py:func}`mth2210.newton1d`,
+4. Newton pour $n\geq 1$ : {py:func}`mth2210.newtonNd`,
 
 Le deuxième type de problème à résoudre est le problème de recherche d'un point
 fixe $z \in \mathbb{R}$ d'une fonction $g:\mathbb{R} \to \mathbb{R}$ tel que
@@ -23,7 +23,7 @@ fixe $z \in \mathbb{R}$ d'une fonction $g:\mathbb{R} \to \mathbb{R}$ tel que
 \end{align*}
  
 L'algorithme disponible pour trouver les points-fixes d'une fonction $g$ est:
-1. Point-fixe pour $n=1$ : {py:func}`MTH2210.ptfixe`
+1. Point-fixe pour $n=1$ : {py:func}`mth2210.ptfixe`
 
 
 ## Exemple de résolution d'une équation non-linéaire
@@ -42,7 +42,7 @@ positive de $f(x) = x^2 - 10$. On définit tout d'abord la fonction $f$:
 
     pd.set_option("float_format", "{:.15e}".format)
 
-    from MTH2210 import bissection, secante, newton1d, ptfixe
+    from mth2210 import bissection, secante, newton1d, ptfixe
 
     def my_fct_nl(x):
         f = x**2 - 10
@@ -53,8 +53,8 @@ positive de $f(x) = x^2 - 10$. On définit tout d'abord la fonction $f$:
         return df
 ```
 
-On appelle ensuite les fonctions {py:func}`MTH2210.bissection`, {py:func}`MTH2210.secante` et
-{py:func}`MTH2210.newton1d` afin de résoudre ce problème. On choisit ``x_0=2.5`` et
+On appelle ensuite les fonctions {py:func}`mth2210.bissection`, {py:func}`mth2210.secante` et
+{py:func}`mth2210.newton1d` afin de résoudre ce problème. On choisit ``x_0=2.5`` et
 ``x_1=4`` de sorte que $f(x_0)f(x_1)<0$ et une tolérance sur l'erreur relative
 de ``tol=10e-9``.
 
@@ -121,9 +121,13 @@ méthodes des points-fixes, de la sécante et de Newton:
 
     # Données à affichées dans un dictionnaire
     data_ptfixe = {"n": np.arange(len(ratio_fixe_1))+1, "e_n/e_{n+1}": ratio_fixe_1, "e_n/e_{n+1}^alpha": ratio_fixe_a, "e_n/e_{n+1}^2": ratio_fixe_2}
-    data_ptfixe_panda = pd.DataFrame(data_ptfixe).style.set_caption("Monthly Sales Performance")
+    
+    # Affichage de l'objet pandas.DataFrame contenant les informations formattées 
+    # La méthode hide(axis="index") permet d'ôter la colonne d'index présente par défaut
+    format_table = {"n": "{:5d}", "e_n/e_{n+1}": "{:.15f}", "e_n/e_{n+1}^alpha": "{:.15e}", "e_n/e_{n+1}^2": "{:.15e}"}
 
-    HTML(data_ptfixe_panda.to_html())
+    data_ptfixe_panda = pd.DataFrame(data_ptfixe).style.format(format_table)
+    data_ptfixe_panda.set_properties(**{'padding-right': '10px'}).hide(axis="index")
 ```
 
 On constate, tel qu'attendu, que la méthode de la sécante converge au nombre

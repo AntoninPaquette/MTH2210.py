@@ -8,8 +8,8 @@
     :nosignatures:
     :toctree: generated
 
-    MTH2210.lagrange
-    MTH2210.splinec
+    mth2210.lagrange
+    mth2210.splinec
 ```
 
 ## Fonctions pour résoudre des équations non-linéaires
@@ -19,11 +19,11 @@
     :nosignatures:
     :toctree: generated
 
-    MTH2210.bissection
-    MTH2210.secante
-    MTH2210.ptfixe
-    MTH2210.newton1d
-    MTH2210.newtonNd
+    mth2210.bissection
+    mth2210.secante
+    mth2210.ptfixe
+    mth2210.newton1d
+    mth2210.newtonNd
 ```
 
 ## Fonctions pour la résolution d'EDO
@@ -33,8 +33,8 @@
     :nosignatures:
     :toctree: generated
 
-    MTH2210.euler
-    MTH2210.euler_modifie
-    MTH2210.pt_milieu
-    MTH2210.rk4
+    mth2210.euler
+    mth2210.euler_modifie
+    mth2210.pt_milieu
+    mth2210.rk4
 ```

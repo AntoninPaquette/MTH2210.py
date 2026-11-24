@@ -11,10 +11,10 @@ $m=2\,\text{kg}$ et de constante de rappel $k=3\,\text{N/m}$.
 
 
 Les algorithmes disponibles sont:
-1. Méthode d'Euler explicite: {py:func}`MTH2210.euler`,
-2. Méthode d'Euler modifié: {py:func}`MTH2210.euler_modifie`,
-3. Méthode du point milieu : {py:func}`MTH2210.pt_milieu`,
-4. Méthode de Runge-Kutta d'ordre 4: {py:func}`MTH2210.rk4`.
+1. Méthode d'Euler explicite: {py:func}`mth2210.euler`,
+2. Méthode d'Euler modifié: {py:func}`mth2210.euler_modifie`,
+3. Méthode du point milieu : {py:func}`mth2210.pt_milieu`,
+4. Méthode de Runge-Kutta d'ordre 4: {py:func}`mth2210.rk4`.
 
 (EDO-exemple)= 
 ## Exemple
@@ -48,7 +48,7 @@ Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}
     import numpy as np
     import matplotlib.pyplot as plt
 
-    from MTH2210 import euler
+    from mth2210 import euler
 
     def my_edo(t,z):
         m = 2.0
@@ -67,7 +67,7 @@ Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}
     import numpy as np
     import matplotlib.pyplot as plt
 
-    from MTH2210 import euler
+    from mth2210 import euler
 
     def my_edo(t,z):
         m = 2.0
@@ -78,7 +78,7 @@ Il faut donc créer la fonction $F:\mathbb{R} \times \mathbb{R}^2 \to \mathbb{R}
         return f
 ``` -->
 
-Il faut ensuite appeler la fonction {py:func}`MTH2210.euler`:
+Il faut ensuite appeler la fonction {py:func}`mth2210.euler`:
 
 ```{eval-rst}
 .. jupyter-execute::

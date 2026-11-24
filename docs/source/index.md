@@ -1,6 +1,6 @@
 # Librairie numérique du cours MTH2210 de Polytechnique Montréal
 
-Ce site web contient la documentation de la librairie numérique MTH2210 de Polytechnique Montréal. 
+Ce site web contient la documentation de la librairie numérique ``mth2210`` de Polytechnique Montréal. 
 
 ## Mise en place
 

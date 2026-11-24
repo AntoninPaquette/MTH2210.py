@@ -91,7 +91,7 @@ def euler(
     Exemple 1D
 
     >>> import numpy as np
-    >>> from MTH2210 import euler
+    >>> from mth2210 import euler
     >>> (t,y) = euler(lambda t, y: np.cos(t), [0,2], 1, 1000)
 
     Exemple ND inline
@@ -163,7 +163,7 @@ def euler_modifie(
     Exemple 1D
 
     >>> import numpy as np
-    >>> from MTH2210 import euler_modifie
+    >>> from mth2210 import euler_modifie
     >>> (t,y) = euler_modifie(lambda t, y: np.cos(t), [0,2], 1, 1000)
 
     Exemple ND inline
@@ -236,7 +236,7 @@ def euler_modifie(
     Exemple 1D
 
     >>> import numpy as np
-    >>> from MTH2210 import euler_modifie
+    >>> from mth2210 import euler_modifie
     >>> (t,y) = euler_modifie(lambda t, y: np.cos(t), [0,2], 1, 1000)
 
     Exemple ND inline
@@ -309,7 +309,7 @@ def pt_milieu(
     Exemple 1D
 
     >>> import numpy as np
-    >>> from MTH2210 import pt_milieu
+    >>> from mth2210 import pt_milieu
     >>> (t,y) = pt_milieu(lambda t, y: np.cos(t), [0,2], 1, 1000)
 
     Exemple ND inline
@@ -384,7 +384,7 @@ def rk4(
     Exemple 1D
 
     >>> import numpy as np
-    >>> from MTH2210 import rk4
+    >>> from mth2210 import rk4
     >>> (t,y) = rk4(lambda t, y: np.cos(t), [0,2], 1, 1000)
 
     Exemple ND inline

@@ -58,7 +58,7 @@ def lagrange(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike):
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import lagrange 
+    >>> from mth2210 import lagrange 
     >>> Lx = lagrange([1,2,4,5], [1,9,2,11], np.linspace(1,5))
 
     References
@@ -144,7 +144,7 @@ def splinec(xi:npt.ArrayLike, yi:npt.ArrayLike, x:npt.ArrayLike, type_S:npt.Arra
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import splinec 
+    >>> from mth2210 import splinec 
     >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [1,1] , [np.nan,np.nan])
     >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [2,2] , [5,-6])
     >>> Sx = splinec([1,2,4,5], [1,9,2,11], np.linspace(1,5), [3,3] , [np.nan,np.nan])

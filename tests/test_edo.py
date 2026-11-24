@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from numpy.linalg import norm
 
-from MTH2210 import euler, euler_modifie, pt_milieu, rk4
+from mth2210 import euler, euler_modifie, pt_milieu, rk4
 from tests.utils import order_computation
 
 # Intégration exacte pour soution polynomiale de degré 1

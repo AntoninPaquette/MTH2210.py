@@ -6,11 +6,11 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'MTH2210'
+project = 'mth2210'
 author = 'Antonin Paquette-Rufiange'
 copyright = '2026, ' + author
 release = '0.1'
-html_title = "Librairie MTH2210"
+html_title = "Librairie mth2210"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

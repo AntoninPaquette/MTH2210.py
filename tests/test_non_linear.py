@@ -4,7 +4,7 @@ import numpy as np
 from numpy.linalg import norm
 from scipy.ndimage import laplace
 
-from MTH2210 import bissection, secante, ptfixe, newton1d, newtonNd
+from mth2210 import bissection, secante, ptfixe, newton1d, newtonNd
 from tests.utils import order_computation
 
 

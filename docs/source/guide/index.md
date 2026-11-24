@@ -30,7 +30,7 @@ Pour une description de chacune des fonctions, allez à la page [Indes des fonct
 ## Exemple - Notebook Jupyter du Laboratoire 0
 
 ```{toctree}
-:maxdepth: 1
+:titlesonly:
 
 laboratoire0
 ```

@@ -81,7 +81,7 @@ def bissection(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import bissection
+    >>> from mth2210 import bissection
     >>> (approx, err_abs) = bissection(lambda x:x**2-2, 0, 2 , 200, 1e-6)
     """
 
@@ -188,7 +188,7 @@ def secante(fct:Callable, x0:float, x1:float, nb_it_max:int, tol_rel:float):
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import secante
+    >>> from mth2210 import secante
     >>> (approx, err_abs) = secante(lambda x:x**2-2, 0, 2 , 50, 1e-6)
     """
 
@@ -266,7 +266,7 @@ def newton1d(fct:Callable, dfct:Callable, x0:float, nb_it_max:int, tol_rel:float
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import newton1d
+    >>> from mth2210 import newton1d
     >>> (approx, err_abs) = newton1d(lambda x:x**2-2, lambda x: 2*x, 0.1, 50, 1e-6)
     """
 
@@ -336,7 +336,7 @@ def ptfixe(fct:Callable, x0:float, nb_it_max:int, tol_rel:float):
     Examples
     --------
     >>> import numpy as np
-    >>> from MTH2210 import ptfixe
+    >>> from mth2210 import ptfixe
     >>> (approx, err_abs) = ptfixe(lambda x : -x**2/10 + x + 1, 4, 50, 1e-6)
     """
 
@@ -410,7 +410,7 @@ def newtonNd(fct:Callable, x0:npt.ArrayLike, nb_it_max:int, tol_rel:float, h:flo
     Exemple avec le paramètre h
 
     >>> import numpy as np
-    >>> from MTH2210 import newtonNd
+    >>> from mth2210 import newtonNd
     >>> def fct(x):
     >>>     return np.array([x[0]**2 + x[1]**2 -1,-x[0]**2 + x[2]])    
     >>> (approx, err_abs) = newtonNd(fct, np.array([1,1]), 20, 1e-6, h=1e-3)
@@ -418,7 +418,7 @@ def newtonNd(fct:Callable, x0:npt.ArrayLike, nb_it_max:int, tol_rel:float, h:flo
     Exemple avec la matrice jacobienne
 
     >>> import numpy as np
-    >>> from MTH2210 import newtonNd
+    >>> from mth2210 import newtonNd
     >>> def fct(x):
     >>>     return np.array([x[0]**2 + x[1]**2 -1,-x[0]**2 + x[2]])
     >>> def dfct(x):
